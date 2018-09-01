@@ -1,4 +1,4 @@
-package com.example.derongliu.opengltest;
+package com.example.derongliu.opengltest.triangle;
 
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -10,7 +10,7 @@ import android.support.annotation.Nullable;
 import android.view.Window;
 import android.view.WindowManager;
 
-public class PhotoActivity extends Activity {
+public class TriangleActivity extends Activity {
     GLSurfaceView glSurfaceView;
 
     @Override
@@ -22,8 +22,7 @@ public class PhotoActivity extends Activity {
         final boolean supportES2 = configurationInfo.reqGlEsVersion >= 0X20000;
         if (supportES2) {
             glSurfaceView.setEGLContextClientVersion(2);
-            //glSurfaceView.setRenderer(new PhotoRender(this));
-            glSurfaceView.setRenderer(new PhotoRenderTexture(this));
+            glSurfaceView.setRenderer(new TriangleRender(this));
             glSurfaceView.setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
 
         }

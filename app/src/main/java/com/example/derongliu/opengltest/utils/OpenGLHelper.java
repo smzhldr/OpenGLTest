@@ -1,4 +1,4 @@
-package com.example.derongliu.opengltest;
+package com.example.derongliu.opengltest.utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -6,6 +6,8 @@ import android.graphics.BitmapFactory;
 import android.service.autofill.LuhnChecksumValidator;
 import android.util.Log;
 import android.view.VelocityTracker;
+
+import com.example.derongliu.opengltest.R;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -102,14 +104,14 @@ public class OpenGLHelper {
 
     public static int loadTexture(Context context,int resourseId){
         final int[] textureId=new int[1];
-        glGenTextures(1,textureId,1);
+        glGenTextures(1,textureId,0);
         if(textureId[0]==0){
             Log.d("textrueProgramOpenGL", "failed");
             return 0;
         }
         final BitmapFactory.Options options=new BitmapFactory.Options();
         options.inScaled=false;
-        final Bitmap bitmap=BitmapFactory.decodeResource(context.getResources(),R.drawable.air_hockey_surface,options);
+        final Bitmap bitmap=BitmapFactory.decodeResource(context.getResources(), R.drawable.air_hockey_surface,options);
         if(bitmap==null){
             Log.d("BitmapProgramOpenGL", "failed");
             return 0;

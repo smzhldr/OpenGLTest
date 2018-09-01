@@ -1,8 +1,11 @@
-package com.example.derongliu.opengltest;
+package com.example.derongliu.opengltest.triangle;
 
 import android.content.Context;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
+
+import com.example.derongliu.opengltest.utils.OpenGLHelper;
+import com.example.derongliu.opengltest.R;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -13,7 +16,7 @@ import javax.microedition.khronos.opengles.GL10;
 
 import static android.opengl.Matrix.orthoM;
 
-public class PhotoRender implements GLSurfaceView.Renderer {
+public class TriangleRender implements GLSurfaceView.Renderer {
 
     private Context context;
     private static final int POSITION_COMPONENT_COUNT = 4;
@@ -29,7 +32,7 @@ public class PhotoRender implements GLSurfaceView.Renderer {
     private final float[] projectionMatrix = new float[16];
     private int uMatrixPosition;
 
-    public PhotoRender(Context context) {
+    public TriangleRender(Context context) {
         this.context = context;
         float[] tableVertices = {
                 0.0f, 0.0f, 0.0f, 1.5f, 1f, 1f, 1f,

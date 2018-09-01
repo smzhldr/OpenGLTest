@@ -21,9 +21,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CameraActivity"/>
+        <activity android:name=".textrueviewcamera.CameraActivity"/>
 
-        <activity android:name=".PhotoActivity"/>
+        <activity android:name=".texture2dimage.Texture2DImageActivity"/>
+        <activity android:name=".triangle.TriangleActivity"/>
     </application>
 
 </manifest>

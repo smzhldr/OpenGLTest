@@ -1,4 +1,4 @@
-package com.example.derongliu.opengltest;
+package com.example.derongliu.opengltest.textrueviewcamera;
 
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
