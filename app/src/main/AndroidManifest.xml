@@ -2,11 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.derongliu.opengltest">
 
-
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
+
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.FLASHLIGHT" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -21,10 +22,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".textrueviewcamera.CameraActivity"/>
-
-        <activity android:name=".texture2dimage.Texture2DImageActivity"/>
-        <activity android:name=".triangle.TriangleActivity"/>
+        <activity android:name=".textrueviewcamera.CameraActivity" />
+        <activity android:name=".texture2dimage.Texture2DImageActivity" />
+        <activity android:name=".triangle.TriangleActivity" />
+        <activity android:name=".gltriangle.GlTriangleActivity"></activity>
     </application>
 
 </manifest>
