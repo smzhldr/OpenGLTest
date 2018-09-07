@@ -25,7 +25,7 @@
         <activity android:name=".textrueviewcamera.CameraActivity" />
         <activity android:name=".texture2dimage.Texture2DImageActivity" />
         <activity android:name=".triangle.TriangleActivity" />
-        <activity android:name=".gltriangle.GlTriangleActivity"></activity>
+        <activity android:name=".gltriangle.GlTriangleActivity1"></activity>
     </application>
 
 </manifest>

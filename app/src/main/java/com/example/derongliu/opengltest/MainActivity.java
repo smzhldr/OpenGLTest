@@ -6,13 +6,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.derongliu.opengltest.gltriangle.GlTriangleActivity1;
 import com.example.derongliu.opengltest.textrueviewcamera.CameraActivity;
 import com.example.derongliu.opengltest.texture2dimage.Texture2DImageActivity;
 import com.example.derongliu.opengltest.triangle.TriangleActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Button camera, photo1,photo2;
+    Button camera, photo1,photo2,trangle1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +27,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         photo2 = findViewById(R.id.photo_point);
         photo2.setOnClickListener(this);
+
+        trangle1=findViewById(R.id.gl_sanjiaoxing1);
+        trangle1.setOnClickListener(this);
 
 
     }
@@ -43,6 +47,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.photo_point:
                 intent.setClass(MainActivity.this,TriangleActivity.class);
                 break;
+            case R.id.gl_sanjiaoxing1:
+                intent.setClass(MainActivity.this, GlTriangleActivity1.class);
             default:
                 break;
         }

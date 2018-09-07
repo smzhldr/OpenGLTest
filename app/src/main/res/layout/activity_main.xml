@@ -33,12 +33,13 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="形体" />
+
     <Button
-        android:id="@+id/gl_sanjiaoxing"
+        android:id="@+id/gl_sanjiaoxing1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="三角形" />
+        android:text="三角形1" />
 
 </LinearLayout>
 </ScrollView>
