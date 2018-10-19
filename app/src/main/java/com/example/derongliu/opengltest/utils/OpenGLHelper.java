@@ -3,6 +3,10 @@ package com.example.derongliu.opengltest.utils;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Matrix;
+import android.graphics.Rect;
+import android.opengl.GLES20;
 import android.service.autofill.LuhnChecksumValidator;
 import android.util.Log;
 import android.view.VelocityTracker;
@@ -78,6 +82,7 @@ public class OpenGLHelper {
         final int programId = glCreateProgram();
         if (programId == 0) {
             Log.d("createProgramOpenGL", "failed");
+            Log.d("errorProgramOpenGL", String.valueOf(GLES20.glGetError()));
             return 0;
         }
         glAttachShader(programId, vertexId);
@@ -111,7 +116,7 @@ public class OpenGLHelper {
         }
         final BitmapFactory.Options options=new BitmapFactory.Options();
         options.inScaled=false;
-        final Bitmap bitmap=BitmapFactory.decodeResource(context.getResources(), R.drawable.air_hockey_surface,options);
+        final Bitmap bitmap=BitmapFactory.decodeResource(context.getResources(), resourseId,options);
         if(bitmap==null){
             Log.d("BitmapProgramOpenGL", "failed");
             return 0;
@@ -119,9 +124,35 @@ public class OpenGLHelper {
         glBindTexture(GL_TEXTURE_2D,textureId[0]);
         glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
         glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
+        //texImage2D(GL_TEXTURE_2D,0,convertBitmap(bitmap,1),0);
         texImage2D(GL_TEXTURE_2D,0,bitmap,0);
         glGenerateMipmap(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D,0);
         return textureId[0];
+    }
+
+
+    public static Bitmap convertBitmap(Bitmap srcBitmap, int mode) {
+        //mode 为0时左右镜像，为1时上下镜像
+        int width = srcBitmap.getWidth();
+        int height = srcBitmap.getHeight();
+
+        Canvas canvas = new Canvas();
+        Matrix matrix = new Matrix();
+        if (mode == 0) {
+            matrix.postScale(-1, 1);
+        } else if (mode == 1) {
+            matrix.postScale(1, -1);
+        } else {
+            return srcBitmap;
+        }
+
+        Bitmap newBitmap2 = Bitmap.createBitmap(srcBitmap, 0, 0, width, height, matrix, true);
+
+        canvas.drawBitmap(newBitmap2,
+                new Rect(0, 0, width, height),
+                new Rect(0, 0, width, height), null);
+
+        return newBitmap2;
     }
 }

@@ -40,6 +40,37 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="三角形1" />
+    <Button
+        android:id="@+id/gl_sanjiaoxing2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="三角形2" />
+
+    <Button
+        android:id="@+id/gl_stencil_test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="FBO..." />
+    <Button
+        android:id="@+id/lifangti"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="立方体" />
+    <Button
+        android:id="@+id/pictureProcess"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="图片处理" />
+    <Button
+        android:id="@+id/glcamera"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="相机" />
 
 </LinearLayout>
 </ScrollView>

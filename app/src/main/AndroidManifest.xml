@@ -25,7 +25,14 @@
         <activity android:name=".textrueviewcamera.CameraActivity" />
         <activity android:name=".texture2dimage.Texture2DImageActivity" />
         <activity android:name=".triangle.TriangleActivity" />
-        <activity android:name=".gltriangle.GlTriangleActivity1"></activity>
+        <activity android:name=".gltriangle.GlTriangleActivity1" />
+        <activity android:name=".gltriangle.GlTriangleActivity2" />
+        <activity android:name=".framebuffer.FBOActivity" />
+        <activity android:name=".lifangti.LifangtiActivity" />
+        <activity android:name=".pictureprocess.PictureProcessActivity"
+            android:theme="@android:style/Theme.Holo.Light.DarkActionBar"></activity>
+        <activity android:name=".camera.GLSurfaceCameraActivity"
+            android:theme="@android:style/Theme.Holo.Light.DarkActionBar"></activity>
     </application>
 
 </manifest>
