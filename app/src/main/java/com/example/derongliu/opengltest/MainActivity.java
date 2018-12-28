@@ -1,5 +1,6 @@
 package com.example.derongliu.opengltest;
 
+import android.Manifest;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.derongliu.opengltest.camera.GLSurfaceCameraActivity;
+import com.example.derongliu.opengltest.camera2.Camera2Activity;
 import com.example.derongliu.opengltest.gltriangle.GlTriangleActivity1;
 import com.example.derongliu.opengltest.gltriangle.GlTriangleActivity2;
 import com.example.derongliu.opengltest.framebuffer.FBOActivity;
@@ -17,10 +19,12 @@ import com.example.derongliu.opengltest.textrueviewcamera.CameraActivity;
 import com.example.derongliu.opengltest.texture2dimage.Texture2DImageActivity;
 import com.example.derongliu.opengltest.triangle.TriangleActivity;
 
+import pub.devrel.easypermissions.EasyPermissions;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     Button camera, photo1, photo2, trangle1, triangle2, steciltest, xingti,
-            Lifangti,pictureProcess,glcamera;
+            Lifangti, pictureProcess, glcamera, camera2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +61,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         glcamera = findViewById(R.id.glcamera);
         glcamera.setOnClickListener(this);
 
+        camera2 = findViewById(R.id.glcamera2);
+        camera2.setOnClickListener(this);
+
+
+        if (!EasyPermissions.hasPermissions(this, new String[]{Manifest.permission.CAMERA})) {
+            EasyPermissions.requestPermissions(this, "拍照需要摄像头权限", 0, new String[]{Manifest.permission.CAMERA});
+        }
 
     }
 
@@ -92,6 +103,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.glcamera:
                 intent.setClass(MainActivity.this, GLSurfaceCameraActivity.class);
+                break;
+            case R.id.glcamera2:
+                intent.setClass(MainActivity.this, Camera2Activity.class);
                 break;
             default:
                 break;

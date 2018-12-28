@@ -72,5 +72,12 @@
         android:gravity="center"
         android:text="相机" />
 
+    <Button
+        android:id="@+id/glcamera2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="相机2"/>
+
 </LinearLayout>
 </ScrollView>

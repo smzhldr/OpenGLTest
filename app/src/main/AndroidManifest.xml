@@ -29,10 +29,13 @@
         <activity android:name=".gltriangle.GlTriangleActivity2" />
         <activity android:name=".framebuffer.FBOActivity" />
         <activity android:name=".lifangti.LifangtiActivity" />
-        <activity android:name=".pictureprocess.PictureProcessActivity"
-            android:theme="@android:style/Theme.Holo.Light.DarkActionBar"></activity>
-        <activity android:name=".camera.GLSurfaceCameraActivity"
-            android:theme="@android:style/Theme.Holo.Light.DarkActionBar"></activity>
+        <activity
+            android:name=".pictureprocess.PictureProcessActivity"
+            android:theme="@android:style/Theme.Holo.Light.DarkActionBar" />
+        <activity
+            android:name=".camera.GLSurfaceCameraActivity"
+            android:theme="@android:style/Theme.Holo.Light.DarkActionBar" />
+        <activity android:name=".camera2.Camera2Activity"></activity>
     </application>
 
 </manifest>
