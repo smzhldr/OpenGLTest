@@ -1,117 +1,132 @@
 package com.example.derongliu.opengltest;
 
-import android.Manifest;
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.derongliu.opengltest.camera.GLSurfaceCameraActivity;
 import com.example.derongliu.opengltest.camera2.Camera2Activity;
+import com.example.derongliu.opengltest.framebuffer.FBOActivity;
 import com.example.derongliu.opengltest.gltriangle.GlTriangleActivity1;
 import com.example.derongliu.opengltest.gltriangle.GlTriangleActivity2;
-import com.example.derongliu.opengltest.framebuffer.FBOActivity;
 import com.example.derongliu.opengltest.lifangti.LifangtiActivity;
-import com.example.derongliu.opengltest.lifangti.LifangtiRender;
 import com.example.derongliu.opengltest.pictureprocess.PictureProcessActivity;
 import com.example.derongliu.opengltest.textrueviewcamera.CameraActivity;
 import com.example.derongliu.opengltest.texture2dimage.Texture2DImageActivity;
 import com.example.derongliu.opengltest.triangle.TriangleActivity;
 
-import pub.devrel.easypermissions.EasyPermissions;
+import java.util.ArrayList;
+import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends Activity implements OnItemClickListener {
 
-    Button camera, photo1, photo2, trangle1, triangle2, steciltest, xingti,
-            Lifangti, pictureProcess, glcamera, camera2;
+    private List<String> itemNameList;
+    private List<Class> classList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        camera = findViewById(R.id.textrue_camera);
-        camera.setOnClickListener(this);
-
-        photo1 = findViewById(R.id.photo_rectangle);
-        photo1.setOnClickListener(this);
-
-        photo2 = findViewById(R.id.photo_point);
-        photo2.setOnClickListener(this);
-
-        xingti = findViewById(R.id.gl_xingti);
-        xingti.setOnClickListener(this);
-
-        trangle1 = findViewById(R.id.gl_sanjiaoxing1);
-        trangle1.setOnClickListener(this);
-
-        triangle2 = findViewById(R.id.gl_sanjiaoxing2);
-        triangle2.setOnClickListener(this);
-
-
-        steciltest = findViewById(R.id.gl_stencil_test);
-        steciltest.setOnClickListener(this);
-
-        Lifangti = findViewById(R.id.lifangti);
-        Lifangti.setOnClickListener(this);
-
-        pictureProcess = findViewById(R.id.pictureProcess);
-        pictureProcess.setOnClickListener(this);
-
-        glcamera = findViewById(R.id.glcamera);
-        glcamera.setOnClickListener(this);
-
-        camera2 = findViewById(R.id.glcamera2);
-        camera2.setOnClickListener(this);
-
-
-        if (!EasyPermissions.hasPermissions(this, new String[]{Manifest.permission.CAMERA})) {
-            EasyPermissions.requestPermissions(this, "拍照需要摄像头权限", 0, new String[]{Manifest.permission.CAMERA});
-        }
-
+        RecyclerView recyclerView = findViewById(R.id.main_recyclerview);
+        initData();
+        initClass();
+        MainAdapter adapter = new MainAdapter(itemNameList);
+        adapter.setListener(this);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+        recyclerView.setAdapter(adapter);
     }
+
+    private void initData() {
+        itemNameList = new ArrayList<>();
+        itemNameList.add("TextureView预览相机");
+        itemNameList.add("Texture展示");
+        itemNameList.add("Triangle绘图");
+        itemNameList.add("三角形1");
+        itemNameList.add("三角形2");
+        itemNameList.add("FBO");
+        itemNameList.add("立方体");
+        itemNameList.add("图片滤镜");
+        itemNameList.add("Camera预览");
+        itemNameList.add("Camera2预览");
+    }
+
+    private void initClass() {
+        classList = new ArrayList<>();
+        classList.add(CameraActivity.class);
+        classList.add(Texture2DImageActivity.class);
+        classList.add(TriangleActivity.class);
+        classList.add(GlTriangleActivity1.class);
+        classList.add(GlTriangleActivity2.class);
+        classList.add(FBOActivity.class);
+        classList.add(LifangtiActivity.class);
+        classList.add(PictureProcessActivity.class);
+        classList.add(GLSurfaceCameraActivity.class);
+        classList.add(Camera2Activity.class);
+    }
+
 
     @Override
-    public void onClick(View v) {
-        Intent intent = new Intent();
-        switch (v.getId()) {
-            case R.id.textrue_camera:
-                intent.setClass(MainActivity.this, CameraActivity.class);
-                break;
-            case R.id.photo_rectangle:
-                intent.setClass(MainActivity.this, Texture2DImageActivity.class);
-                break;
-            case R.id.photo_point:
-                intent.setClass(MainActivity.this, TriangleActivity.class);
-                break;
-            case R.id.gl_xingti:
-                break;
-            case R.id.gl_sanjiaoxing1:
-                intent.setClass(MainActivity.this, GlTriangleActivity1.class);
-                break;
-            case R.id.gl_sanjiaoxing2:
-                intent.setClass(MainActivity.this, GlTriangleActivity2.class);
-                break;
-            case R.id.gl_stencil_test:
-                intent.setClass(MainActivity.this, FBOActivity.class);
-                break;
-            case R.id.lifangti:
-                intent.setClass(MainActivity.this, LifangtiActivity.class);
-                break;
-            case R.id.pictureProcess:
-                intent.setClass(MainActivity.this, PictureProcessActivity.class);
-                break;
-            case R.id.glcamera:
-                intent.setClass(MainActivity.this, GLSurfaceCameraActivity.class);
-                break;
-            case R.id.glcamera2:
-                intent.setClass(MainActivity.this, Camera2Activity.class);
-                break;
-            default:
-                break;
+    public void onItemClick(int position) {
+        Intent intent = new Intent(MainActivity.this, classList.get(position));
+        startActivity(intent);
+
+    }
+
+
+    private class MainAdapter extends RecyclerView.Adapter<MainViewHolder> {
+        List list;
+        private OnItemClickListener listener;
+
+        MainAdapter(List list) {
+            this.list = list;
         }
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivity(intent);
+
+        @Override
+        public MainViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.main_item, parent, false);
+            return new MainViewHolder(v);
+        }
+
+        @Override
+        public void onBindViewHolder(MainViewHolder holder, @SuppressLint("RecyclerView") final int position) {
+            holder.textView.setText(list.get(position).toString());
+            holder.textView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (listener != null) {
+                        listener.onItemClick(position);
+                    }
+                }
+            });
+        }
+
+        @Override
+        public int getItemCount() {
+            return list == null ? 0 : list.size();
+        }
+
+        void setListener(OnItemClickListener listener) {
+            this.listener = listener;
         }
     }
+
+
+    private static class MainViewHolder extends RecyclerView.ViewHolder {
+        TextView textView;
+
+        MainViewHolder(View view) {
+            super(view);
+            textView = (TextView) view.findViewById(R.id.item_textView);
+        }
+    }
+
 }

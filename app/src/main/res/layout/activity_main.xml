@@ -1,83 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/main_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
 
-    <Button
-        android:id="@+id/textrue_camera"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextureView相机预览" />
-
-    <Button
-        android:id="@+id/photo_rectangle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="texture2d球桌" />
-    <Button
-        android:id="@+id/photo_point"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Triangle球桌" />
-    <Button
-        android:id="@+id/gl_xingti"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="形体" />
-
-    <Button
-        android:id="@+id/gl_sanjiaoxing1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="三角形1" />
-    <Button
-        android:id="@+id/gl_sanjiaoxing2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="三角形2" />
-
-    <Button
-        android:id="@+id/gl_stencil_test"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="FBO..." />
-    <Button
-        android:id="@+id/lifangti"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="立方体" />
-    <Button
-        android:id="@+id/pictureProcess"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="图片处理" />
-    <Button
-        android:id="@+id/glcamera"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="相机" />
-
-    <Button
-        android:id="@+id/glcamera2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="相机2"/>
-
-</LinearLayout>
-</ScrollView>
+</FrameLayout>
