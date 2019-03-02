@@ -6,17 +6,16 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 
-public class DRSurfaceView extends SurfaceView implements SurfaceHolder.Callback {
+public class CustomSurfaceView extends SurfaceView implements SurfaceHolder.Callback {
 
     private GlThread glThread;
 
-
-    public DRSurfaceView(Context context) {
+    public CustomSurfaceView(Context context) {
         super(context);
         init();
     }
 
-    public DRSurfaceView(Context context, AttributeSet attributes) {
+    public CustomSurfaceView(Context context, AttributeSet attributes) {
         super(context, attributes);
         init();
     }
@@ -36,14 +35,14 @@ public class DRSurfaceView extends SurfaceView implements SurfaceHolder.Callback
     public void surfaceCreated(SurfaceHolder holder) {
         glThread.setHolder(holder);
         glThread.isChanged = false;
-        requestRenderer();
+        requestRender();
     }
 
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
         glThread.isChanged = false;
         glThread.setSize(width, height);
-        requestRenderer();
+        requestRender();
     }
 
 
@@ -52,15 +51,15 @@ public class DRSurfaceView extends SurfaceView implements SurfaceHolder.Callback
         glThread.onDestroy();
     }
 
-    public void requestRenderer() {
+    public void requestRender() {
         glThread.requestRenderer();
     }
 
 
     private static class GlThread extends Thread {
 
-        public boolean isCreate;
-        public boolean isChanged;
+        boolean isCreate;
+        boolean isChanged;
 
         private EglHelper eglHelper;
         private SurfaceHolder holder;
@@ -97,7 +96,6 @@ public class DRSurfaceView extends SurfaceView implements SurfaceHolder.Callback
         public void run() {
             super.run();
             while (true) {
-
                 synchronized (wait) {
                     try {
                         wait.wait();
@@ -106,8 +104,8 @@ public class DRSurfaceView extends SurfaceView implements SurfaceHolder.Callback
                     }
                 }
 
+                //创建EGL环境
                 if (eglHelper == null && holder != null) {
-                    //创建EGL环境
                     eglHelper = new EglHelper();
                     eglHelper.createGL(holder.getSurface());
                 }
@@ -142,7 +140,6 @@ public class DRSurfaceView extends SurfaceView implements SurfaceHolder.Callback
             }
         }
     }
-
 
     public interface Renderer {
         void onSurfaceCreated();

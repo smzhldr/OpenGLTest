@@ -2,7 +2,6 @@ package com.example.derongliu.opengltest.drsurfaceview;
 
 import android.app.Activity;
 import android.opengl.GLES20;
-import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 
 import com.example.derongliu.opengltest.utils.OpenGLUtils;
@@ -11,19 +10,17 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 
-import javax.microedition.khronos.egl.EGLConfig;
-import javax.microedition.khronos.opengles.GL10;
-
 public class CustomGlSurfaceActivity extends Activity {
     private GLRenderer glRenderer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        DRSurfaceView drSurfaceView = new DRSurfaceView(this);
+
+        CustomSurfaceView drSurfaceView = new CustomSurfaceView(this);
         setContentView(drSurfaceView);
 
-        drSurfaceView.setRenderer(new DRSurfaceView.Renderer() {
+        drSurfaceView.setRenderer(new CustomSurfaceView.Renderer() {
 
             // 顶点着色器的脚本
             private static final String verticesShader
@@ -87,14 +84,6 @@ public class CustomGlSurfaceActivity extends Activity {
                 GLES20.glDisableVertexAttribArray(vPosition);
             }
         });
-
-
-   /* @Override
-    protected void onDestroy() {
-        glRenderer.release();
-        glRenderer = null;
-        super.onDestroy();
-    }*/
 
     }
 }
