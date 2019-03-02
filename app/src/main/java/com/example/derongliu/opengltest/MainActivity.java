@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.example.derongliu.opengltest.camera.GLSurfaceCameraActivity;
 import com.example.derongliu.opengltest.camera2.Camera2Activity;
-import com.example.derongliu.opengltest.drsurfaceview.CustomGlSurfaceActivity;
+import com.example.derongliu.opengltest.customsurfaceview.CustomGlSurfaceActivity;
 import com.example.derongliu.opengltest.framebuffer.FBOActivity;
 import com.example.derongliu.opengltest.gltriangle.GlTriangleActivity1;
 import com.example.derongliu.opengltest.gltriangle.GlTriangleActivity2;

@@ -1,4 +1,4 @@
-package com.example.derongliu.opengltest.drsurfaceview;
+package com.example.derongliu.opengltest.customsurfaceview;
 
 import android.content.Context;
 import android.util.AttributeSet;
