@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.derongliu.opengltest.camera.GLSurfaceCameraActivity;
 import com.example.derongliu.opengltest.camera2.Camera2Activity;
+import com.example.derongliu.opengltest.drsurfaceview.CustomGlSurfaceActivity;
 import com.example.derongliu.opengltest.framebuffer.FBOActivity;
 import com.example.derongliu.opengltest.gltriangle.GlTriangleActivity1;
 import com.example.derongliu.opengltest.gltriangle.GlTriangleActivity2;
@@ -57,6 +58,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
         itemNameList.add("图片滤镜");
         itemNameList.add("Camera预览");
         itemNameList.add("Camera2预览");
+        itemNameList.add("DrSurfaceView");
     }
 
     private void initClass() {
@@ -71,6 +73,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
         classList.add(PictureProcessActivity.class);
         classList.add(GLSurfaceCameraActivity.class);
         classList.add(Camera2Activity.class);
+        classList.add(CustomGlSurfaceActivity.class);
     }
 
 

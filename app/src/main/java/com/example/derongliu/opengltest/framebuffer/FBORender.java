@@ -5,7 +5,7 @@ import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 
 import com.example.derongliu.opengltest.R;
-import com.example.derongliu.opengltest.utils.Gl2Utils;
+import com.example.derongliu.opengltest.utils.OpenGLUtils;
 import com.example.derongliu.opengltest.utils.OpenGLHelper;
 
 import java.nio.ByteBuffer;
@@ -212,7 +212,7 @@ public class FBORender implements GLSurfaceView.Renderer {
         glBindTexture(GL_TEXTURE_2D, ftexture[0]);
 
         float[] tempMatrix = new float[16];
-        multiplyMM(tempMatrix,0,projectionMatrix,0,Gl2Utils.flip(Gl2Utils.getOriginalMatrix(),false,true),0);
+        multiplyMM(tempMatrix,0,projectionMatrix,0, OpenGLUtils.flip(OpenGLUtils.getOriginalMatrix(),false,true),0);
         GLES20.glUniformMatrix4fv(u_matrix, 1, false, tempMatrix, 0);
         glUniform1i(u_Text, 0);
         GLES20.glEnableVertexAttribArray(a_position);

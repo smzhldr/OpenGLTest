@@ -9,7 +9,7 @@ import android.opengl.Matrix;
 import android.util.Log;
 
 import com.example.derongliu.opengltest.R;
-import com.example.derongliu.opengltest.utils.Gl2Utils;
+import com.example.derongliu.opengltest.utils.OpenGLUtils;
 import com.example.derongliu.opengltest.utils.OpenGLHelper;
 
 import java.nio.ByteBuffer;
@@ -249,7 +249,7 @@ public class PictureProcessRender implements GLSurfaceView.Renderer {
 
 
         float[] tempMatrix = new float[16];
-        multiplyMM(tempMatrix, 0, mMVPMatrix, 0, Gl2Utils.flip(Gl2Utils.getOriginalMatrix(), false, true), 0);
+        multiplyMM(tempMatrix, 0, mMVPMatrix, 0, OpenGLUtils.flip(OpenGLUtils.getOriginalMatrix(), false, true), 0);
         GLES20.glUniformMatrix4fv(u_matrix, 1, false, tempMatrix, 0);
 
 

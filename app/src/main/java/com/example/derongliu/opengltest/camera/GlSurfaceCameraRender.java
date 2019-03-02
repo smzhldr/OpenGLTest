@@ -1,20 +1,14 @@
 package com.example.derongliu.opengltest.camera;
 
 import android.app.Activity;
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
 import android.opengl.GLES11Ext;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
-import android.opengl.Matrix;
-import android.util.Log;
 
-import com.example.derongliu.opengltest.R;
-import com.example.derongliu.opengltest.utils.Gl2Utils;
+import com.example.derongliu.opengltest.utils.OpenGLUtils;
 import com.example.derongliu.opengltest.utils.OpenGLHelper;
 
 import java.io.IOException;
@@ -27,17 +21,12 @@ import java.util.List;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
-import static android.opengl.GLES20.GL_TEXTURE0;
-import static android.opengl.GLES20.GL_TEXTURE_2D;
 import static android.opengl.GLES20.GL_TRIANGLE_STRIP;
-import static android.opengl.GLES20.glActiveTexture;
 import static android.opengl.GLES20.glBindTexture;
 import static android.opengl.GLES20.glDrawArrays;
 import static android.opengl.GLES20.glEnableVertexAttribArray;
 import static android.opengl.GLES20.glGetUniformLocation;
-import static android.opengl.GLES20.glShaderSource;
 import static android.opengl.GLES20.glUniform1i;
-import static android.opengl.Matrix.multiplyMM;
 
 public class GlSurfaceCameraRender implements GLSurfaceView.Renderer {
 
@@ -160,13 +149,13 @@ public class GlSurfaceCameraRender implements GLSurfaceView.Renderer {
         float[] matrix = new float[16];
         Camera.Size size = camera.getParameters().getPreviewSize();
 
-        Gl2Utils.getShowMatrix(matrix, size.height, size.width, width, height);
+        OpenGLUtils.getShowMatrix(matrix, size.height, size.width, width, height);
         if (cameraId == 1) {
 
-            Gl2Utils.rotate(matrix, 90);
+            OpenGLUtils.rotate(matrix, 90);
         } else {
-            Gl2Utils.flip(matrix, true, false);
-            Gl2Utils.rotate(matrix, 270);
+            OpenGLUtils.flip(matrix, true, false);
+            OpenGLUtils.rotate(matrix, 270);
         }
         setMatrix(matrix);
 

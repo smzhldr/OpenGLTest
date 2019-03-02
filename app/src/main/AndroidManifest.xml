@@ -15,6 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".drsurfaceview.CustomGlSurfaceActivity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,7 +36,7 @@
         <activity
             android:name=".camera.GLSurfaceCameraActivity"
             android:theme="@android:style/Theme.Holo.Light.DarkActionBar" />
-        <activity android:name=".camera2.Camera2Activity"></activity>
+        <activity android:name=".camera2.Camera2Activity" />
     </application>
 
 </manifest>
