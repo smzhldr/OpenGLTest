@@ -1,4 +1,4 @@
-package com.example.derongliu.opengltest.ndk;
+package com.example.derongliu.opengltest.ndk.byglsurfaceview;
 
 import android.opengl.GLSurfaceView;
 

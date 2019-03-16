@@ -1,9 +1,9 @@
-package com.example.derongliu.opengltest.ndk;
+package com.example.derongliu.opengltest.ndk.byglsurfaceview;
 
 public class NdkGlHelper {
 
     static {
-        System.loadLibrary("ndkGlHelper");
+        System.loadLibrary("gl_helper");
     }
 
     public static native void onSurfaceCreated();

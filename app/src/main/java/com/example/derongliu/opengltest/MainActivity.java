@@ -19,8 +19,8 @@ import com.example.derongliu.opengltest.framebuffer.FBOActivity;
 import com.example.derongliu.opengltest.gltriangle.GlTriangleActivity1;
 import com.example.derongliu.opengltest.gltriangle.GlTriangleActivity2;
 import com.example.derongliu.opengltest.lifangti.LifangtiActivity;
-import com.example.derongliu.opengltest.ndk.NdkGlActivity;
-import com.example.derongliu.opengltest.ndk.NdkGlHelper;
+import com.example.derongliu.opengltest.ndk.byglsurfaceview.NdkGlActivity;
+import com.example.derongliu.opengltest.ndk.bysurfaceview.NdkSurfaceViewActivity;
 import com.example.derongliu.opengltest.pictureprocess.PictureProcessActivity;
 import com.example.derongliu.opengltest.textrueviewcamera.CameraActivity;
 import com.example.derongliu.opengltest.texture2dimage.Texture2DImageActivity;
@@ -61,7 +61,8 @@ public class MainActivity extends Activity implements OnItemClickListener {
         itemNameList.add("Camera预览");
         itemNameList.add("Camera2预览");
         itemNameList.add("SurfaceView自定义Egl环境和线程");
-        itemNameList.add("GlSurfaceView_Ndk编程");
+        itemNameList.add("NdkGlSurfaceView");
+        itemNameList.add("NdkSurfaceView");
     }
 
     private void initClass() {
@@ -78,6 +79,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
         classList.add(Camera2Activity.class);
         classList.add(CustomGlSurfaceActivity.class);
         classList.add(NdkGlActivity.class);
+        classList.add(NdkSurfaceViewActivity.class);
     }
 
 
