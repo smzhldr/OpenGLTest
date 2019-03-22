@@ -21,32 +21,35 @@ public class NdkSurfaceView extends SurfaceView implements SurfaceHolder.Callbac
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
-
+        onStart();
+        onResume();
     }
 
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-
+        setSurface(holder.getSurface());
     }
 
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
-
+        onPause();
+        onStop();
+        setSurface(null);
     }
 
 
-    public static native void onStart();
+    public native void onStart();
 
 
-    public static native void onResume();
+    public native void onResume();
 
 
-    public static native void onPause();
+    public native void onPause();
 
 
-    public static native void onStop();
+    public native void onStop();
 
-    public static native void setSurface(Surface surface);
+    public native void setSurface(Surface surface);
 
     static {
         System.loadLibrary("gl_helper");
