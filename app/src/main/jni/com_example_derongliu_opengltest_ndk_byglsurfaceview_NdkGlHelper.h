@@ -34,11 +34,6 @@ JNIEXPORT void JNICALL Java_com_example_derongliu_opengltest_ndk_byglsurfaceview
 JNIEXPORT void JNICALL Java_com_example_derongliu_opengltest_ndk_byglsurfaceview_NdkGlHelper_onDrawFrame
   (JNIEnv *, jclass);
 
-GLuint CompileShader(GLenum, const char *);
-
-GLuint CreateProgram(const char *, const char *);
-
-
 #ifdef __cplusplus
 }
 #endif

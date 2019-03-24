@@ -19,24 +19,6 @@ Java_com_example_derongliu_opengltest_ndk_bysurfaceview_NdkSurfaceView_onStart
 
 /*
  * Class:     com_example_derongliu_opengltest_ndk_bysurfaceview_NdkSurfaceView
- * Method:    onResume
- * Signature: ()V
- */
-JNIEXPORT void JNICALL
-Java_com_example_derongliu_opengltest_ndk_bysurfaceview_NdkSurfaceView_onResume
-        (JNIEnv *, jobject);
-
-/*
- * Class:     com_example_derongliu_opengltest_ndk_bysurfaceview_NdkSurfaceView
- * Method:    onPause
- * Signature: ()V
- */
-JNIEXPORT void JNICALL
-Java_com_example_derongliu_opengltest_ndk_bysurfaceview_NdkSurfaceView_onPause
-        (JNIEnv *, jobject);
-
-/*
- * Class:     com_example_derongliu_opengltest_ndk_bysurfaceview_NdkSurfaceView
  * Method:    onStop
  * Signature: ()V
  */

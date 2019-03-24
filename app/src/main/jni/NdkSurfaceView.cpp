@@ -13,28 +13,14 @@ JNIEXPORT void JNICALL
 Java_com_example_derongliu_opengltest_ndk_bysurfaceview_NdkSurfaceView_onStart
         (JNIEnv *env, jobject jClass) {
     renderer = new Renderer();
-    return;
-}
-
-
-JNIEXPORT void JNICALL
-Java_com_example_derongliu_opengltest_ndk_bysurfaceview_NdkSurfaceView_onResume
-        (JNIEnv *env, jobject jClass) {
     renderer->start();
-    return;
-}
-
-
-JNIEXPORT void JNICALL
-Java_com_example_derongliu_opengltest_ndk_bysurfaceview_NdkSurfaceView_onPause
-        (JNIEnv *env, jobject jClass) {
-    renderer->stop();
     return;
 }
 
 
 JNIEXPORT void JNICALL Java_com_example_derongliu_opengltest_ndk_bysurfaceview_NdkSurfaceView_onStop
         (JNIEnv *env, jobject jClass) {
+    renderer->stop();
     delete renderer;
     renderer = 0;
     return;

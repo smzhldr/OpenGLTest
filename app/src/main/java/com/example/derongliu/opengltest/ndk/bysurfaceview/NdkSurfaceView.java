@@ -22,7 +22,6 @@ public class NdkSurfaceView extends SurfaceView implements SurfaceHolder.Callbac
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         onStart();
-        onResume();
     }
 
     @Override
@@ -32,20 +31,12 @@ public class NdkSurfaceView extends SurfaceView implements SurfaceHolder.Callbac
 
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
-        onPause();
         onStop();
         setSurface(null);
     }
 
 
     public native void onStart();
-
-
-    public native void onResume();
-
-
-    public native void onPause();
-
 
     public native void onStop();
 

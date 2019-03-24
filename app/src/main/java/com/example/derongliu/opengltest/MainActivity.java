@@ -1,5 +1,6 @@
 package com.example.derongliu.opengltest;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -29,6 +30,8 @@ import com.example.derongliu.opengltest.triangle.TriangleActivity;
 import java.util.ArrayList;
 import java.util.List;
 
+import pub.devrel.easypermissions.EasyPermissions;
+
 public class MainActivity extends Activity implements OnItemClickListener {
 
     private List<String> itemNameList;
@@ -46,7 +49,12 @@ public class MainActivity extends Activity implements OnItemClickListener {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         recyclerView.setAdapter(adapter);
+
+        if(!EasyPermissions.hasPermissions(this, Manifest.permission.CAMERA)){
+            EasyPermissions.requestPermissions(this,"拍照权限",100,Manifest.permission.CAMERA);
+        }
     }
+
 
     private void initData() {
         itemNameList = new ArrayList<>();
