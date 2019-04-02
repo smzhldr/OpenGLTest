@@ -20,6 +20,7 @@ import com.example.derongliu.opengltest.framebuffer.FBOActivity;
 import com.example.derongliu.opengltest.gltriangle.GlTriangleActivity1;
 import com.example.derongliu.opengltest.gltriangle.GlTriangleActivity2;
 import com.example.derongliu.opengltest.lifangti.LifangtiActivity;
+import com.example.derongliu.opengltest.mediaencode.MediaActivity;
 import com.example.derongliu.opengltest.ndk.byglsurfaceview.NdkGlActivity;
 import com.example.derongliu.opengltest.ndk.bysurfaceview.NdkSurfaceViewActivity;
 import com.example.derongliu.opengltest.pictureprocess.PictureProcessActivity;
@@ -71,6 +72,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
         itemNameList.add("SurfaceView自定义Egl环境和线程");
         itemNameList.add("NdkGlSurfaceView");
         itemNameList.add("NdkSurfaceView");
+        itemNameList.add("MediaCodec");
     }
 
     private void initClass() {
@@ -88,6 +90,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
         classList.add(CustomGlSurfaceActivity.class);
         classList.add(NdkGlActivity.class);
         classList.add(NdkSurfaceViewActivity.class);
+        classList.add(MediaActivity.class);
     }
 
 
