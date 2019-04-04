@@ -4,7 +4,10 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -51,14 +54,23 @@ public class MainActivity extends Activity implements OnItemClickListener {
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         recyclerView.setAdapter(adapter);
 
-        if (!EasyPermissions.hasPermissions(this, Manifest.permission.CAMERA)) {
-            EasyPermissions.requestPermissions(this, "拍照权限", 100, Manifest.permission.CAMERA);
+       // if (!EasyPermissions.hasPermissions(this, Manifest.permission.CAMERA)) {
+         //   EasyPermissions.requestPermissions(this, "拍照权限", 100, Manifest.permission.CAMERA);
+        //}
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){ //表示未授权时
+            //进行授权
+            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.CAMERA},0);
         }
-        if (!EasyPermissions.hasPermissions(this, Manifest.permission.RECORD_AUDIO)) {
-            EasyPermissions.requestPermissions(this, "拍照权限", 101, Manifest.permission.RECORD_AUDIO);
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED){ //表示未授权时
+            //进行授权
+            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.RECORD_AUDIO},0);
         }
-        if (!EasyPermissions.hasPermissions(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-            EasyPermissions.requestPermissions(this, "读写权限", 102, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){ //表示未授权时
+            //进行授权
+            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},0);
         }
     }
 

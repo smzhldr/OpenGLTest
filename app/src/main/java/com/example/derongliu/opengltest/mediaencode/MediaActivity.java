@@ -14,6 +14,8 @@ import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 
 import com.example.derongliu.opengltest.R;
@@ -53,48 +55,7 @@ public class MediaActivity extends Activity implements View.OnClickListener, GLS
     Camera camera;
     volatile boolean isRecording;
 
-    private static final String vertexShaderCode =
-            "attribute vec4 vPosition;" +
-                    "uniform mat4 u_Matrix;" +
-                    "attribute vec2 textureCoordinate;" +
-                    "varying vec2 aCoordinate;" +
-
-                    "void main() {" +
-                    "  gl_Position = u_Matrix * vPosition;" +
-                    "  aCoordinate = textureCoordinate;" +
-                    "}";
-
-    private static final String fragmentShaderCode =
-            "#extension GL_OES_EGL_image_external : require\n" +
-                    "precision mediump float;" +
-                    "uniform samplerExternalOES uTexture;" +
-
-                    "varying vec2 aCoordinate;" +
-
-                    "void main() {" +
-                    "vec4 nColor = texture2D(uTexture,aCoordinate);" +
-                    "gl_FragColor=nColor;" +
-
-                    "}";
-
-    private FloatBuffer vertexBuffer, TextureBuffer;
-    private SurfaceTexture surfaceTexture;
-
-
-    float[] cube = {
-            -1.0f, -1.0f,
-            1.0f, -1.0f,
-            -1.0f, 1.0f,
-            1.0f, 1.0f,
-
-    };
-    float[] textureCoord = {
-            0.0f, 0.0f,
-            1.0f, 0.0f,
-            0.0f, 1.0f,
-            1.0f, 1.0f,
-
-    };
+   
 
     private int program;
     private int a_position;
@@ -123,7 +84,11 @@ public class MediaActivity extends Activity implements View.OnClickListener, GLS
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_media);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+
         glSurfaceView = findViewById(R.id.record_sv);
         recordButton = findViewById(R.id.bt_record);
         recordButton.setOnClickListener(this);
@@ -160,20 +125,10 @@ public class MediaActivity extends Activity implements View.OnClickListener, GLS
     public void onClick(View v) {
         if (!isRecording) {
             recordButton.setText("正在录制");
-
-            if (!startRecording) {
-                startRecording(encoderListener);
-                startRecording = true;
-            }
             isRecording = true;
         } else {
             recordButton.setText("开始录制");
             isRecording = false;
-            if (startRecording) {
-                stopRecording();
-                startRecording = false;
-            }
-
         }
     }
 
@@ -194,7 +149,7 @@ public class MediaActivity extends Activity implements View.OnClickListener, GLS
         float[] matrix = new float[16];
         Camera.Size size = camera.getParameters().getPreviewSize();
 
-        OpenGLUtils.getShowMatrix(matrix, width, height, width, height);
+        OpenGLUtils.getShowMatrix(matrix, size.height, size.width, width, height);
         if (cameraId == 1) {
             OpenGLUtils.rotate(matrix, 90);
         } else {
@@ -202,8 +157,8 @@ public class MediaActivity extends Activity implements View.OnClickListener, GLS
             OpenGLUtils.rotate(matrix, 270);
         }
         this.matrix = matrix;
-        this.outputWidth = width;
-        this.outputHeight = height;
+        this.outputWidth = size.height;
+        this.outputHeight = size.width;
     }
 
     @Override
@@ -211,10 +166,10 @@ public class MediaActivity extends Activity implements View.OnClickListener, GLS
         surfaceTexture.updateTexImage();
         drawFrame();
         if (isRecording) {
-           /* if (!startRecording) {
+            if (!startRecording) {
                 startRecording(encoderListener);
                 startRecording = true;
-            }*/
+            }
 
             EGL10 mEGL = (EGL10) EGLContext.getEGL();
             EGLDisplay mEGLDisplay = mEGL.eglGetCurrentDisplay();
@@ -237,10 +192,10 @@ public class MediaActivity extends Activity implements View.OnClickListener, GLS
             // Make screen surface be current surface
             mEGL.eglMakeCurrent(mEGLDisplay, mEGLScreenSurface, mEGLScreenSurface, mEGLContext);
         } else {
-            /*if (startRecording) {
-                stopRecording();
+            if (startRecording) {
                 startRecording = false;
-            }*/
+                stopRecording();
+            }
         }
     }
 
