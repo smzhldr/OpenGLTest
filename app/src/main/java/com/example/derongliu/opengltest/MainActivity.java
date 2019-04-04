@@ -51,8 +51,14 @@ public class MainActivity extends Activity implements OnItemClickListener {
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         recyclerView.setAdapter(adapter);
 
-        if(!EasyPermissions.hasPermissions(this, Manifest.permission.CAMERA)){
-            EasyPermissions.requestPermissions(this,"拍照权限",100,Manifest.permission.CAMERA);
+        if (!EasyPermissions.hasPermissions(this, Manifest.permission.CAMERA)) {
+            EasyPermissions.requestPermissions(this, "拍照权限", 100, Manifest.permission.CAMERA);
+        }
+        if (!EasyPermissions.hasPermissions(this, Manifest.permission.RECORD_AUDIO)) {
+            EasyPermissions.requestPermissions(this, "拍照权限", 101, Manifest.permission.RECORD_AUDIO);
+        }
+        if (!EasyPermissions.hasPermissions(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            EasyPermissions.requestPermissions(this, "读写权限", 102, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         }
     }
 
