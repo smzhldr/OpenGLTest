@@ -19,7 +19,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".mediaencode.MediaActivity"/>
+        <activity android:name=".TestActivity"></activity>
+        <activity android:name=".mediaencode.MediaActivity" />
         <activity android:name=".ndk.bysurfaceview.NdkSurfaceViewActivity" />
         <activity android:name=".ndk.byglsurfaceview.NdkGlActivity" />
         <activity android:name=".customsurfaceview.CustomGlSurfaceActivity" />

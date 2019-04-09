@@ -91,6 +91,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
         itemNameList.add("NdkGlSurfaceView");
         itemNameList.add("NdkSurfaceView");
         itemNameList.add("MediaCodec");
+        itemNameList.add("Test");
     }
 
     private void initClass() {
@@ -109,6 +110,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
         classList.add(NdkGlActivity.class);
         classList.add(NdkSurfaceViewActivity.class);
         classList.add(MediaActivity.class);
+        classList.add(TestActivity.class);
     }
 
 

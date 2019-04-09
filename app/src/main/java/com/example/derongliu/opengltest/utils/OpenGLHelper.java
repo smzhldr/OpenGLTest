@@ -99,35 +99,35 @@ public class OpenGLHelper {
             Log.d("linkProgramOpenGL", "failed");
         }
         glValidateProgram(programId);
-        final int[] validateStatus=new int[1];
-        glGetProgramiv(programId,GL_VALIDATE_STATUS,validateStatus,0);
-        if(validateStatus[0]==0){
+        final int[] validateStatus = new int[1];
+        glGetProgramiv(programId, GL_VALIDATE_STATUS, validateStatus, 0);
+        if (validateStatus[0] == 0) {
             Log.d("validateProgramOpenGL", "failed");
             return;
         }
     }
 
-    public static int loadTexture(Context context,int resourseId){
-        final int[] textureId=new int[1];
-        glGenTextures(1,textureId,0);
-        if(textureId[0]==0){
+    public static int loadTexture(Context context, int resourseId) {
+        final int[] textureId = new int[1];
+        glGenTextures(1, textureId, 0);
+        if (textureId[0] == 0) {
             Log.d("textrueProgramOpenGL", "failed");
             return 0;
         }
-        final BitmapFactory.Options options=new BitmapFactory.Options();
-        options.inScaled=false;
-        final Bitmap bitmap=BitmapFactory.decodeResource(context.getResources(), resourseId,options);
-        if(bitmap==null){
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inScaled = false;
+        final Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), resourseId, options);
+        if (bitmap == null) {
             Log.d("BitmapProgramOpenGL", "failed");
             return 0;
         }
-        glBindTexture(GL_TEXTURE_2D,textureId[0]);
-        glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
+        glBindTexture(GL_TEXTURE_2D, textureId[0]);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
         //texImage2D(GL_TEXTURE_2D,0,convertBitmap(bitmap,1),0);
-        texImage2D(GL_TEXTURE_2D,0,bitmap,0);
+        texImage2D(GL_TEXTURE_2D, 0, bitmap, 0);
         glGenerateMipmap(GL_TEXTURE_2D);
-        glBindTexture(GL_TEXTURE_2D,0);
+        glBindTexture(GL_TEXTURE_2D, 0);
         return textureId[0];
     }
 

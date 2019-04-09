@@ -1,225 +1,81 @@
 package com.example.derongliu.opengltest.mediaencode;
 
-import android.Manifest;
 import android.app.Activity;
-import android.graphics.Rect;
-import android.graphics.SurfaceTexture;
-import android.hardware.Camera;
-import android.media.MediaCodec;
-import android.media.MediaFormat;
-import android.opengl.EGL14;
-import android.opengl.GLES11Ext;
-import android.opengl.GLES20;
+import android.content.ContentValues;
+import android.location.Location;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.SystemClock;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 
 import com.example.derongliu.opengltest.R;
-import com.example.derongliu.opengltest.utils.OpenGLUtils;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.FloatBuffer;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
-import javax.microedition.khronos.egl.EGL10;
-import javax.microedition.khronos.egl.EGLConfig;
-import javax.microedition.khronos.egl.EGLContext;
-import javax.microedition.khronos.egl.EGLDisplay;
-import javax.microedition.khronos.egl.EGLSurface;
-import javax.microedition.khronos.opengles.GL10;
+public class MediaActivity extends Activity implements View.OnClickListener {
 
-import pub.devrel.easypermissions.EasyPermissions;
-
-import static android.opengl.GLES20.GL_TRIANGLE_STRIP;
-import static android.opengl.GLES20.glBindTexture;
-import static android.opengl.GLES20.glDrawArrays;
-import static android.opengl.GLES20.glEnableVertexAttribArray;
-import static android.opengl.GLES20.glGetUniformLocation;
-import static android.opengl.GLES20.glUniform1i;
-
-public class MediaActivity extends Activity implements View.OnClickListener, GLSurfaceView.Renderer {
-
-    GLSurfaceView glSurfaceView;
-    Button recordButton;
-    Camera camera;
-    volatile boolean isRecording;
-
-   
-
-    private int program;
-    private int a_position;
-    private int a_textCoordinate;
-    private int u_Text;
-
-
-    private int textureId;
-    private int u_matrix;
-
-    private int cameraId = 1;
-    private float[] matrix;
-
-
-    WindowSurface windowSurface;
-    EglCore eglCore;
-    MediaVideoEncoder mVideoEncoder;
-    MediaMuxerWrapper mMuxer;
-    MediaAudioEncoder mAudioEncoder;
-    int outputWidth;
-    int outputHeight;
-    boolean startRecording;
     public final static String CAMERA_FOLDER = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getAbsolutePath() + "/Camera/";
-
+    private Button recordButton;
+    private Renderer renderer;
+    private boolean isRecording;
+    private LocationManager locationManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_media);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-
-        glSurfaceView = findViewById(R.id.record_sv);
-        recordButton = findViewById(R.id.bt_record);
-        recordButton.setOnClickListener(this);
+        GLSurfaceView glSurfaceView = findViewById(R.id.record_sv);
         glSurfaceView.setEGLContextClientVersion(2);
-        glSurfaceView.setRenderer(this);
+        renderer = new Renderer(this, glSurfaceView);
+        glSurfaceView.setRenderer(renderer);
         glSurfaceView.setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
+        recordButton = findViewById(R.id.bt_record);
 
-        camera = Camera.open(cameraId);
-        textureId = createCameraTexture();
-        surfaceTexture = new SurfaceTexture(textureId);
+        locationManager = new LocationManager(this, null);
+        locationManager.recordLocation(true);
 
-        surfaceTexture.setOnFrameAvailableListener(new SurfaceTexture.OnFrameAvailableListener() {
-            @Override
-            public void onFrameAvailable(SurfaceTexture surfaceTexture) {
-                glSurfaceView.requestRender();
-            }
-        });
+        recordButton.setOnClickListener(this);
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        renderer.onResume();
+    }
 
-        vertexBuffer = ByteBuffer.allocateDirect(cube.length * 4)
-                .order(ByteOrder.nativeOrder())
-                .asFloatBuffer();
-        vertexBuffer.put(cube);
-        vertexBuffer.position(0);
-
-        TextureBuffer = ByteBuffer.allocateDirect(textureCoord.length * 4)
-                .order(ByteOrder.nativeOrder())
-                .asFloatBuffer();
-        TextureBuffer.put(textureCoord);
-        TextureBuffer.position(0);
+    @Override
+    protected void onPause() {
+        super.onPause();
+        renderer.onPause();
     }
 
     @Override
     public void onClick(View v) {
         if (!isRecording) {
-            recordButton.setText("正在录制");
+            recordButton.setText("录制中...");
             isRecording = true;
+            startRecord();
         } else {
             recordButton.setText("开始录制");
             isRecording = false;
+            renderer.stopRecording();
         }
     }
 
-    @Override
-    public void onSurfaceCreated(GL10 gl, EGLConfig config) {
-        GLES20.glClearColor(1f, 1f, 1f, 1f);
-        program = OpenGLUtils.createGlProgram(vertexShaderCode, fragmentShaderCode);
-
-        a_position = GLES20.glGetAttribLocation(program, "vPosition");
-        a_textCoordinate = GLES20.glGetAttribLocation(program, "textureCoordinate");
-        u_matrix = glGetUniformLocation(program, "u_Matrix");
-        u_Text = GLES20.glGetUniformLocation(program, "uTexture");
-    }
-
-    @Override
-    public void onSurfaceChanged(GL10 gl, int width, int height) {
-        GLES20.glViewport(0, 0, width, height);
-        float[] matrix = new float[16];
-        Camera.Size size = camera.getParameters().getPreviewSize();
-
-        OpenGLUtils.getShowMatrix(matrix, size.height, size.width, width, height);
-        if (cameraId == 1) {
-            OpenGLUtils.rotate(matrix, 90);
-        } else {
-            OpenGLUtils.flip(matrix, true, false);
-            OpenGLUtils.rotate(matrix, 270);
-        }
-        this.matrix = matrix;
-        this.outputWidth = size.height;
-        this.outputHeight = size.width;
-    }
-
-    @Override
-    public void onDrawFrame(GL10 gl) {
-        surfaceTexture.updateTexImage();
-        drawFrame();
-        if (isRecording) {
-            if (!startRecording) {
-                startRecording(encoderListener);
-                startRecording = true;
-            }
-
-            EGL10 mEGL = (EGL10) EGLContext.getEGL();
-            EGLDisplay mEGLDisplay = mEGL.eglGetCurrentDisplay();
-            EGLContext mEGLContext = mEGL.eglGetCurrentContext();
-            EGLSurface mEGLScreenSurface = mEGL.eglGetCurrentSurface(EGL10.EGL_DRAW);
-            // create encoder surface
-            if (windowSurface == null) {
-                eglCore = new EglCore(EGL14.eglGetCurrentContext(), EglCore.FLAG_RECORDABLE);
-                windowSurface = new WindowSurface(eglCore, mVideoEncoder.getSurface(), false);
-            }
-
-            // Draw on encoder surface
-            windowSurface.makeCurrent();
-            drawFrame();
-
-            windowSurface.swapBuffers();
-            mVideoEncoder.frameAvailableSoon();
-
-
-            // Make screen surface be current surface
-            mEGL.eglMakeCurrent(mEGLDisplay, mEGLScreenSurface, mEGLScreenSurface, mEGLContext);
-        } else {
-            if (startRecording) {
-                startRecording = false;
-                stopRecording();
-            }
-        }
-    }
-
-
-    private void drawFrame() {
-        GLES20.glUseProgram(program);
-        glBindTexture(GLES11Ext.GL_TEXTURE_EXTERNAL_OES, textureId);
-        GLES20.glUniformMatrix4fv(u_matrix, 1, false, matrix, 0);
-
-        glUniform1i(u_Text, 0);
-        GLES20.glEnableVertexAttribArray(a_position);
-        GLES20.glVertexAttribPointer(a_position, 2, GLES20.GL_FLOAT, false, 0, vertexBuffer);
-
-        TextureBuffer.clear();
-        TextureBuffer.put(textureCoord).position(0);
-        glEnableVertexAttribArray(a_textCoordinate);
-        GLES20.glVertexAttribPointer(a_textCoordinate, 2, GLES20.GL_FLOAT, false, 0, TextureBuffer);
-
-        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-    }
-
-    public void startRecording(final MediaEncoder.MediaEncoderListener listener) {
+    private void startRecord() {
         File mediaStorageDir;
-
         mediaStorageDir = new File(CAMERA_FOLDER);
 
         if (!mediaStorageDir.exists()) {
@@ -234,7 +90,9 @@ public class MediaActivity extends Activity implements View.OnClickListener, GLS
         String extension = ".mp4";
 
         String title = prefix + timeStamp;
+        final String finalTitle = title;
         File mediaFile = new File(mediaStorageDir, title + extension);
+        final String displayName = mediaFile.getName();
         final String outputPath = mediaFile.getPath();
 
         int index = 1;
@@ -243,104 +101,54 @@ public class MediaActivity extends Activity implements View.OnClickListener, GLS
             mediaFile = new File(mediaStorageDir, title + extension);
             index++;
         }
+        final Location loc = locationManager.getCurrentLocation();
+        final long recordingStartTime = SystemClock.uptimeMillis();
 
-        try {
-            mMuxer = new MediaMuxerWrapper(outputPath);
+        MediaEncoder.MediaEncoderListener encoderListener = new MediaEncoder.MediaEncoderListener() {
+            @Override
+            public void onPrepared(MediaEncoder encoder) {
 
-            // for video capturing
-            mVideoEncoder = new MediaVideoEncoder(mMuxer, listener, outputWidth, outputHeight);
-            // for audio capturing
-            mAudioEncoder = new MediaAudioEncoder(mMuxer, listener);
+            }
 
+            @Override
+            public void onStopped(MediaEncoder encoder) {
 
-            mMuxer.prepare();
-            mMuxer.startRecording();
+            }
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (IllegalStateException e) {
-            e.printStackTrace();
-        }
+            @Override
+            public void onMuxerStopped() {
+                ContentValues currentVideoValues = new ContentValues();
+                currentVideoValues.put(MediaStore.Video.Media.TITLE, finalTitle);
+                currentVideoValues.put(MediaStore.Video.Media.DISPLAY_NAME, displayName);
+                currentVideoValues.put(MediaStore.Video.Media.DATE_TAKEN, System.currentTimeMillis());
+                currentVideoValues.put(MediaStore.Video.Media.MIME_TYPE, "video/mp4");
+                currentVideoValues.put(MediaStore.Video.Media.DATA, outputPath);
+                currentVideoValues.put(MediaStore.Video.Media.DESCRIPTION, "com.example.derongliu.opengltest");
+                if (loc != null) {
+                    currentVideoValues.put(MediaStore.Video.Media.LATITUDE, loc.getLatitude());
+                    currentVideoValues.put(MediaStore.Video.Media.LONGITUDE, loc.getLongitude());
+                }
+                currentVideoValues.put(MediaStore.Video.Media.SIZE, new File(outputPath).length());
+                long duration = SystemClock.uptimeMillis() - recordingStartTime;
+                if (duration > 0) {
+                    currentVideoValues.put(MediaStore.Video.Media.DURATION, duration);
+                } else {
+                    Log.d("Record", "Video duration <= 0 : " + duration);
+                }
+            }
+
+            @Override
+            public void onMuxerStopFailed() {
+                new File(outputPath).delete();
+            }
+        };
+        renderer.startRecording(outputPath, encoderListener);
     }
 
-    private MediaEncoder.MediaEncoderListener encoderListener = new MediaEncoder.MediaEncoderListener() {
-        @Override
-        public void onPrepared(MediaEncoder encoder) {
-
-        }
-
-        @Override
-        public void onStopped(MediaEncoder encoder) {
-
-        }
-
-        @Override
-        public void onMuxerStopped() {
-
-        }
-
-        @Override
-        public void onMuxerStopFailed() {
-
-        }
-    };
-
-    public void stopRecording() {
-
-        mMuxer.stopRecording();
-        if (windowSurface != null) {
-            windowSurface.release();
-            windowSurface = null;
-        }
-
-        if (eglCore != null) {
-            EGL10 mEGL = (EGL10) EGLContext.getEGL();
-            EGLDisplay mEGLDisplay = mEGL.eglGetCurrentDisplay();
-            EGLContext mEGLContext = mEGL.eglGetCurrentContext();
-            EGLSurface mEGLScreenSurface = mEGL.eglGetCurrentSurface(EGL10.EGL_DRAW);
-            eglCore.makeNothingCurrent();
-            eglCore.release();
-            eglCore = null;
-            // Make screen surface be current surface
-            mEGL.eglMakeCurrent(mEGLDisplay, mEGLScreenSurface, mEGLScreenSurface, mEGLContext);
-        }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        try {
-            camera.setPreviewTexture(surfaceTexture);
-            camera.startPreview();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        camera.stopPreview();
-    }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        camera.release();
-    }
 
-    private int createCameraTexture() {
-        int[] texture = new int[1];
-        GLES20.glGenTextures(1, texture, 0);
-        GLES20.glBindTexture(GLES11Ext.GL_TEXTURE_EXTERNAL_OES, texture[0]);
-        GLES20.glTexParameterf(GLES11Ext.GL_TEXTURE_EXTERNAL_OES,
-                GL10.GL_TEXTURE_MIN_FILTER, GL10.GL_LINEAR);
-        GLES20.glTexParameterf(GLES11Ext.GL_TEXTURE_EXTERNAL_OES,
-                GL10.GL_TEXTURE_MAG_FILTER, GL10.GL_LINEAR);
-        GLES20.glTexParameteri(GLES11Ext.GL_TEXTURE_EXTERNAL_OES,
-                GL10.GL_TEXTURE_WRAP_S, GL10.GL_CLAMP_TO_EDGE);
-        GLES20.glTexParameteri(GLES11Ext.GL_TEXTURE_EXTERNAL_OES,
-                GL10.GL_TEXTURE_WRAP_T, GL10.GL_CLAMP_TO_EDGE);
-        return texture[0];
     }
 }
