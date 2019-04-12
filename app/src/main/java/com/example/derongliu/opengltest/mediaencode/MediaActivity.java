@@ -1,13 +1,18 @@
 package com.example.derongliu.opengltest.mediaencode;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.ContentValues;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.SystemClock;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -21,7 +26,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class MediaActivity extends Activity implements View.OnClickListener {
+public class MediaActivity extends Activity implements View.OnClickListener, ActivityCompat.OnRequestPermissionsResultCallback {
 
     public final static String CAMERA_FOLDER = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getAbsolutePath() + "/Camera/";
     private Button recordButton;
@@ -47,30 +52,39 @@ public class MediaActivity extends Activity implements View.OnClickListener {
         locationManager.recordLocation(true);
 
         recordButton.setOnClickListener(this);
+        renderer.start();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        renderer.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        renderer.onPause();
-    }
 
     @Override
     public void onClick(View v) {
         if (!isRecording) {
             recordButton.setText("录制中...");
             isRecording = true;
-            startRecord();
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED){ //表示未授权时
+                //进行授权
+                ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.RECORD_AUDIO},0);
+            } else {
+                startRecord();
+            }
         } else {
             recordButton.setText("开始录制");
             isRecording = false;
             renderer.stopRecording();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case 0: {
+                // 如果授权被取消，结果数组是空的，注意这里是empty ，而不是null
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // 已经授权，在这里做你想要做的事
+                    startRecord();
+                }
+            }
         }
     }
 
@@ -149,6 +163,6 @@ public class MediaActivity extends Activity implements View.OnClickListener {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
+        renderer.stop();
     }
 }

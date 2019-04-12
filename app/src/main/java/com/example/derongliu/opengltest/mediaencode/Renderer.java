@@ -128,7 +128,7 @@ public class Renderer implements GLSurfaceView.Renderer {
     }
 
 
-    public void onResume() {
+    public void start() {
         try {
             camera.setPreviewTexture(surfaceTexture);
             camera.startPreview();
@@ -138,7 +138,7 @@ public class Renderer implements GLSurfaceView.Renderer {
     }
 
 
-    public void onPause() {
+    public void stop() {
         if (camera != null) {
             camera.stopPreview();
             camera.release();
