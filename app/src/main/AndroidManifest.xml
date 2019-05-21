@@ -8,7 +8,7 @@
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.FLASHLIGHT" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
@@ -20,7 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".TestActivity"></activity>
+        <activity android:name=".TestActivity" />
         <activity android:name=".mediaencode.MediaActivity" />
         <activity android:name=".ndk.bysurfaceview.NdkSurfaceViewActivity" />
         <activity android:name=".ndk.byglsurfaceview.NdkGlActivity" />
@@ -46,6 +46,18 @@
             android:name=".camera.GLSurfaceCameraActivity"
             android:theme="@android:style/Theme.Holo.Light.DarkActionBar" />
         <activity android:name=".camera2.Camera2Activity" />
+
+        <service
+            android:name="com.example.derongliu.aidl.MyService"
+            android:process=":remote"
+            android:exported="true"
+            android:enabled="true">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="com.example.derongliu.aidl.MyService" />
+            </intent-filter>
+        </service>
+
     </application>
 
 </manifest>

@@ -22,6 +22,12 @@ android {
         }
     }
 
+    sourceSets {
+        main {
+            aidl.srcDirs = ['src/main/aidl']
+        }
+    }
+
     externalNativeBuild {
         cmake {
             path "CMakeLists.txt"
