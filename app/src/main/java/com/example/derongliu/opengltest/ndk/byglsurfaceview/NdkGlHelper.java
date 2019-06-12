@@ -3,7 +3,7 @@ package com.example.derongliu.opengltest.ndk.byglsurfaceview;
 public class NdkGlHelper {
 
     static {
-        System.loadLibrary("gl_helper");
+        System.loadLibrary("ndklib");
     }
 
     public static native void onSurfaceCreated();

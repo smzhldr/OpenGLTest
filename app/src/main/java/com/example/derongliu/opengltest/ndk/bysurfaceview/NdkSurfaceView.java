@@ -43,6 +43,6 @@ public class NdkSurfaceView extends SurfaceView implements SurfaceHolder.Callbac
     public native void setSurface(Surface surface);
 
     static {
-        System.loadLibrary("gl_helper");
+        System.loadLibrary("ndklib");
     }
 }

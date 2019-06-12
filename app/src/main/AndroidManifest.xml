@@ -20,6 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".ffmpeg.FFmpegActivity"></activity>
         <activity android:name=".TestActivity" />
         <activity android:name=".mediaencode.MediaActivity" />
         <activity android:name=".ndk.bysurfaceview.NdkSurfaceViewActivity" />
@@ -49,15 +50,15 @@
 
         <service
             android:name="com.example.derongliu.aidl.MyService"
-            android:process=":remote"
+            android:enabled="true"
             android:exported="true"
-            android:enabled="true">
+            android:process=":remote">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
+
                 <action android:name="com.example.derongliu.aidl.MyService" />
             </intent-filter>
         </service>
-
     </application>
 
 </manifest>

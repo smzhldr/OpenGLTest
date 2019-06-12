@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.example.derongliu.opengltest.camera.GLSurfaceCameraActivity;
 import com.example.derongliu.opengltest.camera2.Camera2Activity;
 import com.example.derongliu.opengltest.customsurfaceview.CustomGlSurfaceActivity;
+import com.example.derongliu.opengltest.ffmpeg.FFmpegActivity;
 import com.example.derongliu.opengltest.framebuffer.FBOActivity;
 import com.example.derongliu.opengltest.gltriangle.GlTriangleActivity1;
 import com.example.derongliu.opengltest.gltriangle.GlTriangleActivity2;
@@ -54,18 +55,18 @@ public class MainActivity extends Activity implements OnItemClickListener {
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         recyclerView.setAdapter(adapter);
 
-       // if (!EasyPermissions.hasPermissions(this, Manifest.permission.CAMERA)) {
-         //   EasyPermissions.requestPermissions(this, "拍照权限", 100, Manifest.permission.CAMERA);
+        // if (!EasyPermissions.hasPermissions(this, Manifest.permission.CAMERA)) {
+        //   EasyPermissions.requestPermissions(this, "拍照权限", 100, Manifest.permission.CAMERA);
         //}
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){ //表示未授权时
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) { //表示未授权时
             //进行授权
-            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.CAMERA},0);
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 0);
         }
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){ //表示未授权时
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) { //表示未授权时
             //进行授权
-            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},0);
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
         }
 
     }
@@ -87,7 +88,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
         itemNameList.add("NdkGlSurfaceView");
         itemNameList.add("NdkSurfaceView");
         itemNameList.add("MediaCodec");
-        itemNameList.add("Test");
+        itemNameList.add("FFmpeg");
     }
 
     private void initClass() {
@@ -106,7 +107,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
         classList.add(NdkGlActivity.class);
         classList.add(NdkSurfaceViewActivity.class);
         classList.add(MediaActivity.class);
-        classList.add(TestActivity.class);
+        classList.add(FFmpegActivity.class);
     }
 
 
