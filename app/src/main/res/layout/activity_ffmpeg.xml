@@ -6,10 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".ffmpeg.FFmpegActivity">
 
-    <TextView
+    <Button
         android:id="@+id/id_ffmpeg_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"/>
+        android:text="播放视频"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <SurfaceView
+        android:id="@+id/id_sv_ffmpeg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintVertical_weight="1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/id_ffmpeg_tv" />
+
 
 </android.support.constraint.ConstraintLayout>

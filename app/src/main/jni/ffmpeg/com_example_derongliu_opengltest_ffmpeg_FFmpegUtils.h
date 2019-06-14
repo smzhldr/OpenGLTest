@@ -9,11 +9,14 @@ extern "C" {
 #endif
 /*
  * Class:     com_example_derongliu_opengltest_ffmpeg_FFmpegUtils
- * Method:    getFFmpegInfo
- * Signature: ()Ljava/lang/String;
+ * Method:    playVideo
+ * Signature: (Ljava/lang/String;Ljava/lang/Object;)Ljava/lang/String;
  */
-JNIEXPORT jstring JNICALL Java_com_example_derongliu_opengltest_ffmpeg_FFmpegUtils_getFFmpegInfo
-  (JNIEnv *, jclass);
+JNIEXPORT jint JNICALL Java_com_example_derongliu_opengltest_ffmpeg_FFmpegUtils_playVideo
+        (JNIEnv *, jclass, jstring);
+
+JNIEXPORT void JNICALL Java_com_example_derongliu_opengltest_ffmpeg_FFmpegUtils_setSurface
+        (JNIEnv *, jclass, jobject);
 
 #ifdef __cplusplus
 }
