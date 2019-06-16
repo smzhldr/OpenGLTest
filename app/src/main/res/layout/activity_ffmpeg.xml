@@ -1,25 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ffmpeg.FFmpegActivity">
 
-    <Button
-        android:id="@+id/id_ffmpeg_tv"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="播放视频"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        android:gravity="center|top"
+        android:orientation="horizontal">
 
-    <SurfaceView
-        android:id="@+id/id_sv_ffmpeg"
+        <Button
+            android:id="@+id/id_ffmpeg_acc_chooser"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="音频解码"
+            android:textAlignment="center" />
+
+        <Button
+            android:id="@+id/id_ffmpeg_aac"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="音频播放"
+            android:textAlignment="center" />
+
+        <Button
+            android:id="@+id/id_ffmpeg_mp4_chooser"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="视频解码"
+            android:textAlignment="center" />
+
+        <Button
+            android:id="@+id/id_ffmpeg_mp4"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="视频播放"
+            android:textAlignment="center" />
+
+    </LinearLayout>
+
+    <android.opengl.GLSurfaceView
+        android:id="@+id/id_ffmpeg_sv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintVertical_weight="1"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/id_ffmpeg_tv" />
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
-
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>
