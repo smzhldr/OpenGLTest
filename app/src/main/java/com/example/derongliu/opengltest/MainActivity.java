@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -35,8 +36,6 @@ import com.example.derongliu.opengltest.triangle.TriangleActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-import pub.devrel.easypermissions.EasyPermissions;
-
 public class MainActivity extends Activity implements OnItemClickListener {
 
     private List<String> itemNameList;
@@ -51,13 +50,9 @@ public class MainActivity extends Activity implements OnItemClickListener {
         initClass();
         MainAdapter adapter = new MainAdapter(itemNameList);
         adapter.setListener(this);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new GridLayoutManager(this,3,LinearLayoutManager.VERTICAL,false));
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         recyclerView.setAdapter(adapter);
-
-        // if (!EasyPermissions.hasPermissions(this, Manifest.permission.CAMERA)) {
-        //   EasyPermissions.requestPermissions(this, "拍照权限", 100, Manifest.permission.CAMERA);
-        //}
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) { //表示未授权时
             //进行授权
