@@ -69,7 +69,7 @@ set_target_properties( # 库名称
 
         # 库的路径
         PROPERTIES IMPORTED_LOCATION
-        ${LIBS_DIR}/armeabi/libavcodec-57.so)
+        ${LIBS_DIR}/armeabi-v7a/libavcodec-57.so)
 
 # 用于各种音视频封装格式的生成和解析，读取音视频帧等功能
 add_library(avformat
@@ -78,7 +78,7 @@ add_library(avformat
 
 set_target_properties(avformat
         PROPERTIES IMPORTED_LOCATION
-        ${LIBS_DIR}/armeabi/libavformat-57.so)
+        ${LIBS_DIR}/armeabi-v7a/libavformat-57.so)
 
 # 包含一些公共的工具函数
 add_library(avutil
@@ -87,7 +87,7 @@ add_library(avutil
 
 set_target_properties(avutil
         PROPERTIES IMPORTED_LOCATION
-        ${LIBS_DIR}/armeabi/libavutil-55.so)
+        ${LIBS_DIR}/armeabi-v7a/libavutil-55.so)
 
 # 提供了各种音视频过滤器
 add_library(avfilter
@@ -96,7 +96,7 @@ add_library(avfilter
 
 set_target_properties(avfilter
         PROPERTIES IMPORTED_LOCATION
-        ${LIBS_DIR}/armeabi/libavfilter-6.so)
+        ${LIBS_DIR}/armeabi-v7a/libavfilter-6.so)
 
 # 用于音频重采样，采样格式转换和混合
 add_library(swresample
@@ -105,7 +105,7 @@ add_library(swresample
 
 set_target_properties(swresample
         PROPERTIES IMPORTED_LOCATION
-        ${LIBS_DIR}/armeabi/libswresample-2.so)
+        ${LIBS_DIR}/armeabi-v7a/libswresample-2.so)
 
 # 用于视频场景比例缩放、色彩映射转换
 add_library(swscale
@@ -114,7 +114,7 @@ add_library(swscale
 
 set_target_properties(swscale
         PROPERTIES IMPORTED_LOCATION
-        ${LIBS_DIR}/armeabi/libswscale-4.so)
+        ${LIBS_DIR}/armeabi-v7a/libswscale-4.so)
 
 
 add_library(device
@@ -123,7 +123,7 @@ add_library(device
 
 set_target_properties(device
         PROPERTIES IMPORTED_LOCATION
-        ${LIBS_DIR}/armeabi/libavdevice-57.so)
+        ${LIBS_DIR}/armeabi-v7a/libavdevice-57.so)
 
 
 add_library(postproc
@@ -132,7 +132,7 @@ add_library(postproc
 
 set_target_properties(postproc
         PROPERTIES IMPORTED_LOCATION
-        ${LIBS_DIR}/armeabi/libpostproc-54.so)
+        ${LIBS_DIR}/armeabi-v7a/libpostproc-54.so)
 
 
 
