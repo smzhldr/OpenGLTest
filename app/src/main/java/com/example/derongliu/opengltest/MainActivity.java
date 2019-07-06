@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.derongliu.mediacodec.encode.MediaEncodeActivity;
 import com.example.derongliu.opengltest.camera.GLSurfaceCameraActivity;
 import com.example.derongliu.opengltest.camera2.Camera2Activity;
 import com.example.derongliu.opengltest.customsurfaceview.CustomGlSurfaceActivity;
@@ -69,21 +70,22 @@ public class MainActivity extends Activity implements OnItemClickListener {
 
     private void initData() {
         itemNameList = new ArrayList<>();
-        itemNameList.add("TextureView预览相机");
-        itemNameList.add("Texture展示纹理_图片");
-        itemNameList.add("Triangle绘图");
-        itemNameList.add("三角形1");
-        itemNameList.add("三角形2");
+        itemNameList.add("TV_Preview");
+        itemNameList.add("Texture_Pic");
+        itemNameList.add("Rectangle");
+        itemNameList.add("Trag1");
+        itemNameList.add("Trag_Matrix");
         itemNameList.add("FBO");
-        itemNameList.add("立方体");
-        itemNameList.add("图片滤镜");
-        itemNameList.add("Camera预览");
-        itemNameList.add("Camera2预览");
-        itemNameList.add("SurfaceView自定义Egl环境和线程");
-        itemNameList.add("NdkGlSurfaceView");
-        itemNameList.add("NdkSurfaceView");
-        itemNameList.add("MediaCodec");
-        itemNameList.add("FFmpeg");
+        itemNameList.add("Cube");
+        itemNameList.add("Filters");
+        itemNameList.add("Camera");
+        itemNameList.add("Camera2");
+        itemNameList.add("SV_Egl_Thread");
+        itemNameList.add("Ndk_GSV");
+        itemNameList.add("Ndk_SV_Thread");
+        itemNameList.add("MediaCodec_Libs");
+        itemNameList.add("FFmpeg Test");
+        itemNameList.add("M_encode");
     }
 
     private void initClass() {
@@ -103,6 +105,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
         classList.add(NdkSurfaceViewActivity.class);
         classList.add(MediaActivity.class);
         classList.add(FFmpegActivity.class);
+        classList.add(MediaEncodeActivity.class);
     }
 
 

@@ -11,9 +11,8 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
-    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="false"
@@ -23,7 +22,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,8 +29,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name="com.example.derongliu.ffmpeg.FFmpegActivity"/>
+        <activity android:name="com.example.derongliu.ffmpeg.FFmpegActivity" />
         <activity android:name=".TestActivity" />
         <activity android:name="com.example.derongliu.mediacodec.MediaActivity" />
         <activity android:name=".ndk.bysurfaceview.NdkSurfaceViewActivity" />
@@ -64,6 +61,8 @@
                 <action android:name="com.example.derongliu.aidl.MyService" />
             </intent-filter>
         </service>
+
+        <activity android:name="com.example.derongliu.mediacodec.encode.MediaEncodeActivity"></activity>
     </application>
 
 </manifest>
