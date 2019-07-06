@@ -1,4 +1,4 @@
-package com.example.derongliu.opengltest.mediaencode;
+package com.example.derongliu.mediacodec;
 
 import android.Manifest;
 import android.app.Activity;
@@ -19,6 +19,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 
+import com.example.derongliu.mediacodec.libs.LocationManager;
+import com.example.derongliu.mediacodec.libs.MediaEncoder;
 import com.example.derongliu.opengltest.R;
 
 import java.io.File;

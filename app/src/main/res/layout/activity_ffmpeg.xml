@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ffmpeg.FFmpegActivity">
+    tools:context="com.example.derongliu.ffmpeg.FFmpegActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

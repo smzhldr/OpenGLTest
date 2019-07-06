@@ -1,10 +1,8 @@
-package com.example.derongliu.opengltest.mediaencode;
+package com.example.derongliu.mediacodec;
 
 import android.content.Context;
 import android.opengl.GLES20;
 
-import com.example.derongliu.opengltest.R;
-import com.example.derongliu.opengltest.utils.OpenGLHelper;
 import com.example.derongliu.opengltest.utils.OpenGLUtils;
 
 import java.nio.ByteBuffer;

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.derongliu.opengltest.mediaencode;
+package com.example.derongliu.mediacodec.libs;
 
 import android.graphics.Bitmap;
 import android.opengl.EGL14;

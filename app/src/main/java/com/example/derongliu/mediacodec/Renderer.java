@@ -1,4 +1,4 @@
-package com.example.derongliu.opengltest.mediaencode;
+package com.example.derongliu.mediacodec;
 
 import android.Manifest;
 import android.content.Context;
@@ -10,6 +10,12 @@ import android.opengl.GLES11Ext;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 
+import com.example.derongliu.mediacodec.libs.EglCore;
+import com.example.derongliu.mediacodec.libs.MediaAudioEncoder;
+import com.example.derongliu.mediacodec.libs.MediaEncoder;
+import com.example.derongliu.mediacodec.libs.MediaMuxerWrapper;
+import com.example.derongliu.mediacodec.libs.MediaVideoEncoder;
+import com.example.derongliu.mediacodec.libs.WindowSurface;
 import com.example.derongliu.opengltest.utils.OpenGLUtils;
 
 import java.io.IOException;

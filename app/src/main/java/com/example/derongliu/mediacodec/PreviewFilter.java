@@ -1,7 +1,5 @@
-package com.example.derongliu.opengltest.mediaencode;
+package com.example.derongliu.mediacodec;
 
-import android.graphics.SurfaceTexture;
-import android.opengl.GLES10Ext;
 import android.opengl.GLES11Ext;
 import android.opengl.GLES20;
 
@@ -14,7 +12,6 @@ import java.nio.FloatBuffer;
 import static android.opengl.GLES20.GL_TRIANGLE_STRIP;
 import static android.opengl.GLES20.glBindTexture;
 import static android.opengl.GLES20.glDrawArrays;
-import static android.opengl.GLES20.glEnableVertexAttribArray;
 import static android.opengl.GLES20.glGetUniformLocation;
 import static android.opengl.GLES20.glUniform1i;
 

@@ -1,7 +1,6 @@
-package com.example.derongliu.opengltest.ffmpeg;
+package com.example.derongliu.ffmpeg;
 
 import android.opengl.GLES20;
-import android.util.Log;
 
 import com.example.derongliu.opengltest.utils.OpenGLUtils;
 

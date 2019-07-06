@@ -1,4 +1,4 @@
-package com.example.derongliu.opengltest.mediaencode;
+package com.example.derongliu.mediacodec.libs;
 /*
  * AudioVideoRecordingSample
  * Sample project to cature audio and video from internal mic/camera and save as MPEG4 file.

@@ -32,9 +32,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ffmpeg.FFmpegActivity"/>
+        <activity android:name="com.example.derongliu.ffmpeg.FFmpegActivity"/>
         <activity android:name=".TestActivity" />
-        <activity android:name=".mediaencode.MediaActivity" />
+        <activity android:name="com.example.derongliu.mediacodec.MediaActivity" />
         <activity android:name=".ndk.bysurfaceview.NdkSurfaceViewActivity" />
         <activity android:name=".ndk.byglsurfaceview.NdkGlActivity" />
         <activity android:name=".customsurfaceview.CustomGlSurfaceActivity" />

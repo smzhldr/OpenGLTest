@@ -1,6 +1,4 @@
-package com.example.derongliu.opengltest.ffmpeg;
-
-import android.view.Surface;
+package com.example.derongliu.ffmpeg;
 
 public class FFmpegUtils {
 

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.derongliu.opengltest.mediaencode;
+package com.example.derongliu.mediacodec.libs;
 
 import android.annotation.TargetApi;
 import android.graphics.SurfaceTexture;

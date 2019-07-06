@@ -1,4 +1,4 @@
-package com.example.derongliu.opengltest.mediaencode;
+package com.example.derongliu.mediacodec.libs;
 
 import android.content.Context;
 import android.location.Location;
