@@ -56,11 +56,11 @@ Java_com_example_derongliu_ffmpeg_FFmpegUtils_set(JNIEnv *env, jobject obj, jint
 }
 
 JNIEXPORT jint JNICALL
-Java_com_example_derongliu_opengltest_ffmpeg_FFmpegUtils_get(JNIEnv *env, jobject obj, jint key) {
+Java_com_example_derongliu_ffmpeg_FFmpegUtils_get(JNIEnv *env, jobject obj, jint key) {
     return codec->get(key);
 }
 
 JNIEXPORT void JNICALL
-Java_com_example_derongliu_opengltest_ffmpeg_FFmpegUtils_release(JNIEnv *env, jobject obj) {
+Java_com_example_derongliu_ffmpeg_FFmpegUtils_release(JNIEnv *env, jobject obj) {
     Codec::release();
 }
