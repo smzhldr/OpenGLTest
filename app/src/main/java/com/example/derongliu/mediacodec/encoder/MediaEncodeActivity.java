@@ -2,14 +2,18 @@ package com.example.derongliu.mediacodec.encoder;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.pm.PackageManager;
 import android.graphics.ImageFormat;
 import android.hardware.Camera;
+import android.location.Location;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.SystemClock;
+import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -20,7 +24,11 @@ import android.widget.Button;
 
 import com.example.derongliu.opengltest.R;
 
+import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class MediaEncodeActivity extends Activity implements SurfaceHolder.Callback, Camera.PreviewCallback {
 
@@ -34,6 +42,17 @@ public class MediaEncodeActivity extends Activity implements SurfaceHolder.Callb
     MediaMuxerWrapper muxerWrapper;
 
     long recordingStartTime;
+
+    String timeStamp;
+    String prefix = "VID_";
+    String extension = ".mp4";
+
+    String title;
+
+    String displayName;
+    String outputPath;
+    File mediaFile;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,11 +70,6 @@ public class MediaEncodeActivity extends Activity implements SurfaceHolder.Callb
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO}, 0);
         }
 
-       /* final String finalTitle = "smzh";
-        File mediaFile = new File(CAMERA_FOLDER + "smzh.mp4");
-        final String displayName = mediaFile.getName();
-        final String outputPath = mediaFile.getPath();*/
-
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,22 +78,49 @@ public class MediaEncodeActivity extends Activity implements SurfaceHolder.Callb
                 if (isRecording) {
                     button.setText("正在录像");
 
+                    recordingStartTime = SystemClock.uptimeMillis();
+
+                    File mediaStorageDir;
+                    mediaStorageDir = new File(CAMERA_FOLDER);
+
+                    if (!mediaStorageDir.exists()) {
+                        if (!mediaStorageDir.mkdirs()) {
+                            return;
+                        }
+                    }
+
+
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HHmmssSSS", Locale.US);
+                    timeStamp = dateFormat.format(new Date());
+
+                    title = prefix + timeStamp;
+
+                    mediaFile = new File(mediaStorageDir, title + extension);
+                    displayName = mediaFile.getName();
+                    outputPath = mediaFile.getPath();
+
+                    int index = 1;
+                    while (mediaFile.exists()) {
+                        title = prefix + timeStamp + "-" + index;
+                        mediaFile = new File(mediaStorageDir, title + extension);
+                        index++;
+                    }
+
                     if (getDegree() == 0 || getDegree() == 180) {
-                        muxerWrapper = new MediaMuxerWrapper(CAMERA_FOLDER + "smzh.mp4", height, width);
+                        muxerWrapper = new MediaMuxerWrapper(outputPath, height, width);
                     } else {
-                        muxerWrapper = new MediaMuxerWrapper(CAMERA_FOLDER + "smzh.mp4", width, height);
+                        muxerWrapper = new MediaMuxerWrapper(outputPath, width, height);
                     }
                     muxerWrapper.start();
 
-                    recordingStartTime = SystemClock.uptimeMillis();
 
                 } else {
                     button.setText("开始录像");
                     muxerWrapper.stop();
                     muxerWrapper = null;
 
-                  /*  ContentValues currentVideoValues = new ContentValues();
-                    currentVideoValues.put(MediaStore.Video.Media.TITLE, finalTitle);
+                    ContentValues currentVideoValues = new ContentValues();
+                    currentVideoValues.put(MediaStore.Video.Media.TITLE, title);
                     currentVideoValues.put(MediaStore.Video.Media.DISPLAY_NAME, displayName);
                     currentVideoValues.put(MediaStore.Video.Media.DATE_TAKEN, System.currentTimeMillis());
                     currentVideoValues.put(MediaStore.Video.Media.MIME_TYPE, "video/mp4");
@@ -90,9 +131,10 @@ public class MediaEncodeActivity extends Activity implements SurfaceHolder.Callb
                     long duration = SystemClock.uptimeMillis() - recordingStartTime;
                     if (duration > 0) {
                         currentVideoValues.put(MediaStore.Video.Media.DURATION, duration);
+                        getContentResolver().insert(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, currentVideoValues);
                     } else {
                         Log.d("Record", "Video duration <= 0 : " + duration);
-                    }*/
+                    }
                 }
             }
         });

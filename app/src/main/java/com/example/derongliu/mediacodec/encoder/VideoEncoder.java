@@ -8,7 +8,7 @@ import android.media.MediaMuxer;
 import java.io.IOException;
 import java.util.concurrent.ArrayBlockingQueue;
 
-public class VideoEncoder extends Encoder {
+public class VideoEncoder extends MediaEncoder {
 
     private static final int DEFAULT_FRAME_RATE = 30;
     private static final int DEFAULT_IFRAME_INTERVAL = 5;

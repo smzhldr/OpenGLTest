@@ -63,9 +63,9 @@ public class MediaActivity extends Activity implements View.OnClickListener, Act
         if (!isRecording) {
             recordButton.setText("录制中...");
             isRecording = true;
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED){ //表示未授权时
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) { //表示未授权时
                 //进行授权
-                ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.RECORD_AUDIO},0);
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO}, 0);
             } else {
                 startRecord();
             }
@@ -148,6 +148,7 @@ public class MediaActivity extends Activity implements View.OnClickListener, Act
                 long duration = SystemClock.uptimeMillis() - recordingStartTime;
                 if (duration > 0) {
                     currentVideoValues.put(MediaStore.Video.Media.DURATION, duration);
+                    getContentResolver().insert(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, currentVideoValues);
                 } else {
                     Log.d("Record", "Video duration <= 0 : " + duration);
                 }

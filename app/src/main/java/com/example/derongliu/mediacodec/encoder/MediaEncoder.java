@@ -6,7 +6,7 @@ import android.util.Log;
 
 import java.nio.ByteBuffer;
 
-public abstract class Encoder implements Runnable {
+public abstract class MediaEncoder implements Runnable {
 
     protected static final String TAG = "HWRecorder";
 
@@ -32,7 +32,7 @@ public abstract class Encoder implements Runnable {
 
     private final Object locker = new Object();
 
-    public Encoder(MediaMuxer mediaMuxer) {
+    public MediaEncoder(MediaMuxer mediaMuxer) {
         this.mediaMuxer = mediaMuxer;
         bufferInfo = new MediaCodec.BufferInfo();
         started = true;

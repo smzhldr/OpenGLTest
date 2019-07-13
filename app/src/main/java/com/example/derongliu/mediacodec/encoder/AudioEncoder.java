@@ -12,9 +12,8 @@ import android.util.Log;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.concurrent.ArrayBlockingQueue;
-import java.util.logging.Handler;
 
-public class AudioEncoder extends Encoder {
+public class AudioEncoder extends MediaEncoder {
 
     private static final int DEFAULT_BITRATE_AUDIO = 128 * 1000;
 
