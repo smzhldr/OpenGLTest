@@ -17,7 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.derongliu.mediacodec.encode.MediaEncodeActivity;
+import com.example.derongliu.mediacodec.encoder.MediaEncodeActivity;
 import com.example.derongliu.opengltest.camera.GLSurfaceCameraActivity;
 import com.example.derongliu.opengltest.camera2.Camera2Activity;
 import com.example.derongliu.opengltest.customsurfaceview.CustomGlSurfaceActivity;

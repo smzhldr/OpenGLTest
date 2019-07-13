@@ -62,7 +62,7 @@
             </intent-filter>
         </service>
 
-        <activity android:name="com.example.derongliu.mediacodec.encode.MediaEncodeActivity"></activity>
+        <activity android:name="com.example.derongliu.mediacodec.encoder.MediaEncodeActivity"></activity>
     </application>
 
 </manifest>

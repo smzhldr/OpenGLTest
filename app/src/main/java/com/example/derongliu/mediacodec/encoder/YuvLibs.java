@@ -1,4 +1,4 @@
-package com.example.derongliu.mediacodec.encode;
+package com.example.derongliu.mediacodec.encoder;
 
 import android.support.annotation.NonNull;
 
@@ -81,8 +81,7 @@ public class YuvLibs {
 
 
 
-    public static void NV21ToNV12(@NonNull byte[] nv21, @NonNull byte[] nv12, int width, int height) {
-        int frameSize = width * height;
+    public static void NV21ToNV12(@NonNull byte[] nv21, @NonNull byte[] nv12, int frameSize) {
 
         int i = 0, j = 0;
         System.arraycopy(nv21, 0, nv12, 0, frameSize);
