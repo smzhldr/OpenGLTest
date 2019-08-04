@@ -4,6 +4,7 @@
 # Sets the minimum version of CMake required to build the native library.
 
 cmake_minimum_required(VERSION 3.4.1)
+add_definitions(-std=c++11)
 
 # Creates and names a library, sets it as either STATIC
 # or SHARED, and provides the relative paths to its source code.
@@ -25,7 +26,8 @@ add_library( # Sets the name of the library.
         src/main/jni/ffmpeg/AACDecoder.cpp
         src/main/jni/ffmpeg/Codec.cpp
         src/main/jni/ffmpeg/utils.cpp
-        src/main/jni/ffmpeg/H264Decoder.cpp)
+        src/main/jni/ffmpeg/H264Decoder.cpp
+        src/main/jni/ffmpeg/encode/FFEncoder.cpp)
 
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because CMake includes system libraries in the search path by
