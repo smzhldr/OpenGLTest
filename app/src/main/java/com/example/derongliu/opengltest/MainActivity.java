@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.derongliu.ffmpeg.decoder.FFDecoderActivity;
 import com.example.derongliu.mediacodec.decoder.MediaDeCoderActivity;
 import com.example.derongliu.mediacodec.encoder.MediaEncodeActivity;
 import com.example.derongliu.opengltest.camera.GLSurfaceCameraActivity;
@@ -88,6 +89,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
         itemNameList.add("FFmpeg Test");
         itemNameList.add("M_encode");
         itemNameList.add(("M_decode"));
+        itemNameList.add("F_Decoder");
     }
 
     private void initClass() {
@@ -109,6 +111,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
         classList.add(FFmpegActivity.class);
         classList.add(MediaEncodeActivity.class);
         classList.add(MediaDeCoderActivity.class);
+        classList.add(FFDecoderActivity.class);
     }
 
 

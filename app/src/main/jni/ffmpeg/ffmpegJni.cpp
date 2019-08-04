@@ -3,10 +3,10 @@
 //
 #include "com_example_derongliu_ffmpeg_FFmpegUtils.h"
 #include <jni.h>
-#include "AACDecoder.h"
-#include "Codec.h"
-#include "utils.h"
-#include "H264Decoder.h"
+#include <decondertest264/Codec.h>
+#include <decondertest264/AACDecoder.h>
+#include <decondertest264/H264Decoder.h>
+
 
 Codec *codec;
 

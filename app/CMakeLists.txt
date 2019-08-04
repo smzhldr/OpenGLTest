@@ -22,11 +22,13 @@ add_library( # Sets the name of the library.
         src/main/jni/NdkSurfaceView.cpp
         src/main/jni/Renderer.cpp
         src/main/jni/OpenGlUtils.cpp
+
         src/main/jni/ffmpeg/ffmpegJni.cpp
-        src/main/jni/ffmpeg/AACDecoder.cpp
-        src/main/jni/ffmpeg/Codec.cpp
-        src/main/jni/ffmpeg/utils.cpp
-        src/main/jni/ffmpeg/H264Decoder.cpp
+        src/main/jni/ffmpeg/decondertest264/AACDecoder.cpp
+        src/main/jni/ffmpeg/decondertest264/Codec.cpp
+        src/main/jni/ffmpeg/decondertest264/H264Decoder.cpp
+
+        src/main/jni/ffmpeg/decoder/decoderJni.cpp
         src/main/jni/ffmpeg/encode/FFEncoder.cpp)
 
 # Searches for a specified prebuilt library and stores the path as a
