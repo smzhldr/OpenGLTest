@@ -2,9 +2,12 @@
 // Created by derong.liu on 2019/3/14.
 //
 
-#include "com_example_derongliu_opengltest_ndk_bysurfaceview_NdkSurfaceView.h"
+#include <jni.h>
+#include <GLES2/gl2.h>
 #include <android/native_window_jni.h> // requires ndk r5 or newer
 #include "Renderer.h"
+
+extern "C" {
 
 static ANativeWindow *window = 0;
 static Renderer *renderer = 0;
@@ -37,5 +40,6 @@ Java_com_example_derongliu_opengltest_ndk_bysurfaceview_NdkSurfaceView_setSurfac
         ANativeWindow_release(window);
     }
     return;
+}
 }
 

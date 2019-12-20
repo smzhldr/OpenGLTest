@@ -6,7 +6,6 @@
 #include <unistd.h>
 #include <android/native_window.h>
 #include "Renderer.h"
-#include "com_example_derongliu_opengltest_ndk_byglsurfaceview_NdkGlHelper.h"
 #include "OpengGlUtils.h"
 
 

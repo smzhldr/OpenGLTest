@@ -1,8 +1,13 @@
 //
 // Created by derong.liu on 2019/3/5.
 //
-#include "com_example_derongliu_opengltest_ndk_byglsurfaceview_NdkGlHelper.h"
+#include <jni.h>
+#include <GLES2/gl2.h>
+#include <android/log.h>
+#include <GLES2/gl2ext.h>
 #include "OpengGlUtils.h"
+
+extern "C" {
 
 GLuint program;
 GLuint glAttrPosition;
@@ -42,7 +47,9 @@ JNIEXPORT void JNICALL Java_com_example_derongliu_opengltest_ndk_byglsurfaceview
     glClear(GL_COLOR_BUFFER_BIT);
     glUseProgram(program);
     glEnableVertexAttribArray(glAttrPosition);
-    glVertexAttribPointer(glAttrPosition,2,GL_FLOAT,GL_FALSE, 0,cube);
-    glDrawArrays(GL_TRIANGLES,0,3);
+    glVertexAttribPointer(glAttrPosition, 2, GL_FLOAT, GL_FALSE, 0, cube);
+    glDrawArrays(GL_TRIANGLES, 0, 3);
     glDisableVertexAttribArray(glAttrPosition);
+}
+
 }
